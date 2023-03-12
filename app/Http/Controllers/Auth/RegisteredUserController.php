@@ -17,8 +17,10 @@ class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
+     * 
+     * @return \Illuminate\View\View
      */
-    public function create(): View
+    public function create()
     {
         return view('auth.register');
     }
@@ -32,7 +34,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

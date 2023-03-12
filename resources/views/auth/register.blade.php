@@ -1,6 +1,15 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@section('content')
+   
+   <div class="prose mx-auto text-center">
+       <h2>Sign up</h2>
+   </div>
+   
+   <div class="flex jastify-center">
+    <form method="POST" action="{{ route('register') }}" class="w-1/2">
+    </div>
+    
+    @csrf
 
         <!-- Name -->
         <div>
