@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,6 +17,25 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+     
+     /**
+     * このユーザが所有する投稿。（ Micropostモデルとの関係を定義）
+     */
+     public function microposts()
+     {
+         return $this->hasMany(Micropost::class);
+     }
+     
+     
+      /**
+     * このユーザに関係するモデルの件数をロードする。
+     */
+     public function loadRelationshipCounts()
+     {
+         $this->loadCount('microposts');
+     }
+     
+     
     protected $fillable = [
         'name',
         'email',
